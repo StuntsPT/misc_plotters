@@ -39,7 +39,8 @@ def data_gather(SNPs_filename):
     for i in range(1, len(cols)):
         multicol = numpy.concatenate((cols[0], cols[i]), axis=1)
         target = [multicol[multicol[:, 0]==k] for k in numpy.unique(multicol[:, 0])]
-        #print(itemfreq(target[0][:, 1]))
+        for p in pops:
+            print(itemfreq(target[0][:, 1]))
 
     #SNPs = snp_data[0][1:]
     #snp_data = numpy.delete(snp_data, (0), axis=0)
