@@ -14,41 +14,43 @@
 # You should have received a copy of the GNU General Public License
 # along with misc_plotters.  If not, see <http://www.gnu.org/licenses/>.
 
+# Usage: python3 Allele_freq_plotter.py Genepop.DIV plots_dir
+
 import matplotlib.pyplot as plt
-import numpy
-from scipy.stats import itemfreq
 
 
-class SNP():
-    def __init__(self, name):
-        self.name = name[:-3]
-        self.bases = name[-3:]
-        self.freqs = {}
-        
+def freq_gather(freq_filename):
+    """Parses the Genepop output file with allele frequencies and returns a
+    dict like this: {locus:{pop:[allelesFreq, allelesFreq]}"""
+    snp_dict = {}
+    with open(freq_filename, "r") as infile:
+        interesting = 0
+        for lines in infile:
+            if interesting == 0 and lines.startswith("Locus:"):
+                interesting = 1
+                locus = lines.strip().split()[1]
+                snp_dict[locus] = {}
+            elif interesting == 1 and lines.startswith("Total:"):
+                interesting = 0
+            elif interesting == 1 and lines.startswith(("\n", "=", "Pop",  "          -")) == False:
+                if lines.strip("\n").endswith(" "):
+                    alleles1 = lines.strip().split()
+                elif lines.strip().endswith("Total"):
+                    alleles2 = lines.strip().split()[:-1]
+                    alleles = list(map(str.__add__, alleles1, alleles2))
+                else:
+                    lines = lines.split()
+                    pop=lines[0][:3]
 
-def data_gather(SNPs_filename):
-    snp_data = numpy.genfromtxt(SNPs_filename, delimiter = " ", autostrip=True, 
-                                 dtype=str, skip_header=False,
-                                 filling_values=False)
-    cols = numpy.hsplit(snp_data, len(snp_data[0]))
-    pops = numpy.delete(cols[0], (0), axis=0)
-    pops = sorted(list(set(pops.flat)))
-#    test = numpy.concatenate((cols[0], cols[1]), axis=1)
-#    split_pops = [test[test[:, 0]==k] for k in numpy.unique(test[:, 0])]
-#    print(itemfreq(split_pops[0][:, 1]))
-    for i in range(1, len(cols)):
-        multicol = numpy.concatenate((cols[0], cols[i]), axis=1)
-        target = [multicol[multicol[:, 0]==k] for k in numpy.unique(multicol[:, 0])]
-        for p in pops:
-            print(itemfreq(target[0][:, 1]))
+                    freqs = lines[-1 - len(alleles):-1]
+                    snp_dict[locus][pop] = list(map(str.__add__, alleles, freqs))
+    
+    return snp_dict
 
-    #SNPs = snp_data[0][1:]
-    #snp_data = numpy.delete(snp_data, (0), axis=0)
-    #split_pops = [snp_data[snp_data[:,0]==k] for k in numpy.unique(snp_data[:,0])]
-    #print(split_pops[0][0][0])
-    #for pop in split_pops:
-    #    print(itemfreq(i))
+def plotter(snp_dict, outpath):
+    """Docment here"""
+    
 
-        
-
-data_gather("/home/francisco/Dropbox/Science/PhD/Sequenom_SNPs/Frequencies/SNPs.csv")
+if __name__ == "__main__":
+    from sys import argv
+    freq_gather(argv[1])
