@@ -56,7 +56,7 @@ def plotter(snp_dict, outpath):
     width = 0.7
     figcounter = 0
     for snp in snp_dict:
-        plt.figure(figcounter)
+        plt.figure(figcounter, figsize=(14, 6))
         locus = snp
         N = len(snp_dict[snp])
         ind = list(range(N))
@@ -75,7 +75,6 @@ def plotter(snp_dict, outpath):
             plt.xticks(ind+width/2., list(frequencies.keys()))
             plt.legend((p1[0], p2[0]), alleles)
             plt.savefig(argv[2] + locus + "_plot.svg", format="svg")
-            print(locus + "____2")
             
         elif len(alleles) == 3:
             freqs = [x for x in frequencies.values()]
@@ -85,10 +84,8 @@ def plotter(snp_dict, outpath):
             plt.ylabel("Allele Frequency")
             plt.title(locus)
             plt.xticks(ind+width/2., list(frequencies.keys()))
-            plt.legend((p1[0], p2[0], p3[0]), alleles)
+            plt.legend((p1[0], p2[0], p3[0]), alleles, loc='center left', bbox_to_anchor=(1, 0.5))
             plt.savefig(argv[2] + locus + "_plot.svg", format="svg")
-            print(locus + "____3")
-            print(freqs)
             
             plt.close(figcounter)
             figcounter += 1
