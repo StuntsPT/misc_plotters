@@ -73,7 +73,7 @@ def plotter(snp_dict, outpath):
             plt.ylabel("Allele Frequency")
             plt.title(locus)
             plt.xticks(ind+width/2., list(frequencies.keys()))
-            plt.legend((p1[0], p2[0]), alleles)
+            plt.legend((p1[0], p2[0]), alleles, loc='center left', bbox_to_anchor=(1, 0.5))
             plt.savefig(argv[2] + locus + "_plot.svg", format="svg")
             
         elif len(alleles) == 3:
