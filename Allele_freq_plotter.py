@@ -19,6 +19,7 @@
 import matplotlib.pyplot as plt
 from collections import OrderedDict
 from numpy import arange
+from operator import add
 
 
 def freq_gather(freq_filename):
@@ -52,7 +53,7 @@ def freq_gather(freq_filename):
 
 def plotter(snp_dict, outpath):
     """Docment here"""
-    width = 0.5
+    width = 0.7
     figcounter = 0
     for snp in snp_dict:
         plt.figure(figcounter)
@@ -80,16 +81,17 @@ def plotter(snp_dict, outpath):
             freqs = [x for x in frequencies.values()]
             p1 = plt.bar(ind, [x[0] for x in freqs], width, color='r')
             p2 = plt.bar(ind, [x[1] for x in freqs], width, color='y', bottom=[x[0] for x in freqs])
-            p3 = plt.bar(ind, [x[2] for x in freqs], width, color='g', bottom=[x[1] for x in freqs])
+            p3 = plt.bar(ind, [x[2] for x in freqs], width, color='g', bottom=list(map(add, [x[1] for x in freqs], [x[0] for x in freqs])))
             plt.ylabel("Allele Frequency")
             plt.title(locus)
             plt.xticks(ind+width/2., list(frequencies.keys()))
             plt.legend((p1[0], p2[0], p3[0]), alleles)
             plt.savefig(argv[2] + locus + "_plot.svg", format="svg")
             print(locus + "____3")
+            print(freqs)
             
-        plt.close(figcounter)
-        figcounter += 1
+            plt.close(figcounter)
+            figcounter += 1
         
             
 def translation(alleles):
