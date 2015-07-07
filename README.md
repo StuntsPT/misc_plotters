@@ -1,5 +1,7 @@
 # misc_plotters
-A collection of scripts for plotting several kinds of data
+A collection of scripts for plotting several kinds of data.
+
+Some examples of what these scripts produce can be found in the "examples" diectory.
 
 -------
 
