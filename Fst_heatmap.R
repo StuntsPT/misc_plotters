@@ -15,8 +15,6 @@
 # along with Fst_heatmap.R. If not, see <http://www.gnu.org/licenses/>.
 
 
-# Usage: Rscript Fst_heatmap.R
-
 # This will draw the color matrix plot
 library(corrplot)
 trimatirxdata <- read.csv("~/Dropbox/Science/PhD/Sequenom_SNPs/GenePop/With PIS/Fst_matrix_lowerNn_upperN_noPIS_names.txt", sep="\t", header=TRUE)
