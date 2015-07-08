@@ -37,6 +37,13 @@ This script requires the "corrplot" package. You can download it from CRAN.
 
 -------
 
+##Mantel_plotter.R
+
+This script will plot the data used for a Mantel test and the associates correlation line.
+Does not give a very nice result. It has been abandoned before being really usefull.
+Still full hard-coded.
+
+
 ## Allele_freq_plotter.py
 
 Not yet documented. Sorry for any inconvenience.
