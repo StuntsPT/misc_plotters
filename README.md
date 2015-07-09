@@ -11,6 +11,8 @@ This is a dirty script (it's all hardcoded, and uses non-conventional files) to 
 
 ### Input files
 
+The data utilized in this script can be obtained with [Genepop](http://kimura.univ-montp2.fr/~rousset/), in the output.MIG 
+
 The first part requires a triangular matrix (upper and lower) of pairwise Fst values. Eg.:
 
        A B C D
