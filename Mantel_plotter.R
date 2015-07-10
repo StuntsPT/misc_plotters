@@ -18,14 +18,15 @@ slatkin_dist_all <- read.csv("~/Dropbox/Science/PhD/Sequenom_SNPs/GenePop/No PIS
 matrixdata_all <- as.matrix(slatkin_dist_all)
 colnames(matrixdata_all) <- c("Slatkin", "Geo")
 
-all <- plot(matrixdata_all[,"Geo"], matrixdata_all[,"Slatkin"], col="red")
+#all <- plot(matrixdata_all[,"Geo"], matrixdata_all[,"Slatkin"], col="red")
 lines(lowess(matrixdata_all[,"Geo"], matrixdata_all[,"Slatkin"]), col="red")
 
 slatkin_dist_neut <- read.csv("~/Dropbox/Science/PhD/Sequenom_SNPs/GenePop/No PIS/Geo/Neutrals/Slatkin_distance.txt", sep="\t", header=FALSE)
 matrixdata_neut <- as.matrix(slatkin_dist_neut)
 colnames(matrixdata_neut) <- c("Slatkin", "Geo")
 
-points(matrixdata_neut[,"Geo"], matrixdata_neut[,"Slatkin"], col="green")
+all <- plot(matrixdata_neut[,"Geo"], matrixdata_neut[,"Slatkin"], col="green")
+#points(matrixdata_neut[,"Geo"], matrixdata_neut[,"Slatkin"], col="green")
 lines(lowess(matrixdata_neut[,"Geo"], matrixdata_neut[,"Slatkin"]), col="green")
 
 slatkin_dist_non_neut <- read.csv("~/Dropbox/Science/PhD/Sequenom_SNPs/GenePop/No PIS/Geo/Non-Neutrals/Slatkin_distance.txt", sep="\t", header=FALSE)
@@ -34,3 +35,5 @@ colnames(matrixdata_non_neut) <- c("Slatkin", "Geo")
 
 points(matrixdata_non_neut[,"Geo"], matrixdata_non_neut[,"Slatkin"], col="blue")
 lines(lowess(matrixdata_non_neut[,"Geo"], matrixdata_non_neut[,"Slatkin"]), col="blue")
+
+
