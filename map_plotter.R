@@ -18,7 +18,7 @@
 
 library(akima)
 
-tdp <- read.csv("~/He_geo_Ho.txt", sep="\t", header=FALSE)
+tdp <- read.csv("/home/francisco/Dropbox/Science/PhD/Sequenom_SNPs/Maps/He_geo_Ho.txt", sep="\t", header=FALSE)
 tdm <- as.matrix(tdp)
 
 x <- as.vector(tdm[,3])
