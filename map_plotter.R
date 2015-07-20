@@ -40,8 +40,11 @@ convcoords <- mapproject(x,y, projection="mercator")
 newx <- as.vector(unlist(convcoords[1]))
 newy <- as.vector(unlist(convcoords[2]))
 
-akima.li <- interp(newx,newy,z,yo = seq(min(newy), max(newy), length = 100),
-                   xo = seq(min(newx), max(newx), length = 100))
+akima.li <- interp(newx,newy,z,yo = seq(min(newy), max(newy), length = 150),
+                   xo = seq(min(newx), max(newx), length = 150))
 with(akima.li,image(x,y,z))
 
 #points(newx,newy)
+
+library(fields)
+image.plot(akima.li, col = heat.colors(32))
