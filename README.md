@@ -39,7 +39,7 @@ This script requires the "corrplot" package. You can download it from CRAN.
 
 -------
 
-##Mantel_plotter.R
+## Mantel_plotter.R
 
 This script will plot the data used for a Mantel test and the associates correlation line.
 Does not give a very nice result. It has been abandoned before being really usefull.
@@ -49,6 +49,12 @@ Still full hard-coded.
 ## Allele_freq_plotter.py
 
 Not yet documented. Sorry for any inconvenience.
+
+
+## p-value-freqs.py
+
+This script will parse a single column file with one p-value (or q-value) per line and plot a frequency histogram.
+Requirements and usage can be found within the script itself.
 
 ## License
 
