@@ -36,7 +36,7 @@ def plotter(pvalues):
     center = (bins[:-1] + bins[1:]) / 2
     plt.bar(center, hist, align='center', width=width)
     plt.ylabel("Frequency")
-    plt.xlabel("q-value")
+    plt.xlabel("p-value")
     plt.show()
 
 if __name__ == "__main__":
