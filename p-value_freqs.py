@@ -28,7 +28,9 @@ def parse_pvalues(pvalue_filename):
     for lines in infile:
         pvalues.append(float(lines.strip()))
 
+    infile.close()
     return pvalues
+
 
 def plotter(pvalues):
     hist, bins = np.histogram(pvalues, bins=50)
