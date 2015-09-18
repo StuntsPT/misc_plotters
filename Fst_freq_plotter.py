@@ -30,6 +30,7 @@ def parse_fsts(fst_filename):
 
 
 def plotter(fsts):
+    """Creates and plots the histogram from a list of values or a 1D array."""
     hist, bins = np.histogram(fsts, bins=50)
     width = 0.7 * (bins[1] - bins[0])
     center = (bins[:-1] + bins[1:]) / 2
