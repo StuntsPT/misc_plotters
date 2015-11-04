@@ -46,6 +46,12 @@ Does not give a very nice result. It has been abandoned before being really usef
 Still full hard-coded.
 
 
+## Correlogram.R
+
+This script will grab 2 triangular matrices (generated with GenePop), one genetic distance and one of geographic distance and will plot the respective Mantel correlograms.
+Fully hard coded.
+
+
 ## Allele_freq_plotter.py
 
 Not yet documented. Sorry for any inconvenience.
