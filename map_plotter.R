@@ -21,9 +21,9 @@ library(akima)
 tdp <- read.csv("/home/francisco/Dropbox/Science/PhD/Sequenom_SNPs/Maps/He_geo_Ho.txt", sep="\t", header=FALSE)
 tdm <- as.matrix(tdp)
 
-x <- as.vector(tdm[,3])
-y <- as.vector(tdm[,2])
-z <- as.vector(tdm[,4])
+x <- as.vector(tdm[,3]) # Lat
+y <- as.vector(tdm[,2]) # Long
+z <- as.vector(tdm[,4]) # Diversity measure
 
 
 akima.li <- interp(x,y,z,yo = seq(min(y), max(y), length = 100),
