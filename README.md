@@ -45,12 +45,21 @@ This script will plot the data used for a Mantel test and the associates correla
 Does not give a very nice result. It has been abandoned before being really usefull.
 Still full hard-coded.
 
+--------
 
 ## Correlogram.R
 
 This script will grab 2 triangular matrices (generated with GenePop), one genetic distance and one of geographic distance and will plot the respective Mantel correlograms.
 Fully hard coded.
 
+---------
+
+## map_plotter.R
+
+This script will plot a measurement of genetic diversity (or any value as for that matter) in a coordinate system, along with the interpolation between each data point.
+Hard coded and poorly documented (but the code should be simple enough to understand). Use at your own risk.
+
+--------
 
 ## Allele_freq_plotter.py
 
