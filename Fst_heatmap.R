@@ -15,9 +15,9 @@
 # along with Fst_heatmap.R. If not, see <http://www.gnu.org/licenses/>.
 
 # Set some variables
-double_tri_matrix = "/home/francisco/Dropbox/Science/PhD/Sequenom_SNPs/3rd Generation/Fst/FST_Tri_Matix_NN-lower_N-upper.csv"
-neutral_fst = "/home/francisco/Dropbox/Science/PhD/Sequenom_SNPs/3rd Generation/Fst/Neutrals.txt"
-non_nutral_fst = "/home/francisco/Dropbox/Science/PhD/Sequenom_SNPs/3rd Generation/Fst/Neutrals.txt"
+double_tri_matrix = "/home/francisco/Desktop/sequenom/Fst/Tri_Matix_NN-lower_N-upper.csv"
+neutral_fst = "/home/francisco/Desktop/sequenom/Fst/neutrals.csv"
+non_nutral_fst = "/home/francisco/Desktop/sequenom/Fst/non_neutrals.csv"
 
 # This will draw the color matrix plot
 library(corrplot)
@@ -32,6 +32,7 @@ Neut_matrix <- as.matrix(Neut_line_data)
 Neut_matrix[Neut_matrix<0] <- 0
 
 dens <- density(Neut_matrix)
+#lines(dens$x,length(Neut_matrix)*dens$y,type="l",xlab="Value",ylab="Density")
 plot(dens$x,length(Neut_matrix)*dens$y,type="l",xlab="Value",ylab="Density", col="black")
 
 Non_neut_line_data <- read.csv(non_nutral_fst, sep="\t", header=FALSE)
@@ -40,5 +41,5 @@ Non_neut_matrix[Non_neut_matrix<0] <- 0
 
 dens <- density(Non_neut_matrix)
 lines(dens$x,length(Non_neut_matrix)*dens$y,type="l",xlab="Value",ylab="Density", lty=2)
-#plot(dens$x,length(Non_neut_matrix)*dens$y,type="l",xlab="Value",ylab="Density", col="green")
+#plot(dens$x,length(Non_neut_matrix)*dens$y,type="l",xlab="Value",ylab="Density", col="black", lty=2)
 
