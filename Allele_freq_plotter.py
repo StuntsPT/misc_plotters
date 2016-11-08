@@ -16,10 +16,10 @@
 
 # Usage: python3 Allele_freq_plotter.py Genepop.DIV plots_dir
 
-import matplotlib.pyplot as plt
 from collections import OrderedDict
-from numpy import arange
 from operator import add
+from numpy import arange
+import matplotlib.pyplot as plt
 
 
 def freq_gather(freq_filename):
@@ -35,21 +35,25 @@ def freq_gather(freq_filename):
                 snp_dict[locus] = {}
             elif interesting == 1 and lines.startswith("Total:"):
                 interesting = 0
-            elif interesting == 1 and lines.startswith(("\n", "=", "Pop",  "          -")) == False:
+            elif interesting == 1 and not lines.startswith(("\n", "=", "Pop",
+                                                            "          -")):
                 if lines.strip("\n").endswith(" "):
                     alleles1 = lines.strip().split()
                 elif lines.strip().endswith("Total"):
                     alleles2 = lines.strip().split()[:-1]
-                    alleles = translation(list(map(str.__add__, alleles1, alleles2)))
+                    alleles = translation(list(map(str.__add__, alleles1,
+                                                   alleles2)))
                 else:
                     lines = lines.split()
                     pop = lines[0][:3]
 
                     freqs = lines[-1 - len(alleles):-1]
                     snp_dict[locus][pop] = OrderedDict()
-                    snp_dict[locus][pop] = list(map(str.__add__, alleles, freqs))
-    
+                    snp_dict[locus][pop] = list(map(str.__add__, alleles,
+                                                    freqs))
+
     return snp_dict
+
 
 def plotter(snp_dict, outpath):
     """Docment here"""
@@ -64,38 +68,45 @@ def plotter(snp_dict, outpath):
         alleles = [x[:2] for x in list(snp_dict[snp].values())[0]]
         frequencies = OrderedDict()
         for pop in snp_dict[snp]:
-            frequencies[pop] = list(map(int, [x[2:] for x in snp_dict[snp][pop]]))
+            frequencies[pop] = list(map(int, [x[2:] for x in
+                                              snp_dict[snp][pop]]))
 
         if len(alleles) == 2:
             freqs = [x for x in frequencies.values()]
             p1 = plt.bar(ind, [x[0] for x in freqs], width, color='r')
-            p2 = plt.bar(ind, [x[1] for x in freqs], width, color='y', bottom=[x[0] for x in freqs])
+            p2 = plt.bar(ind, [x[1] for x in freqs], width, color='y',
+                         bottom=[x[0] for x in freqs])
             plt.ylabel("Allele Frequency")
             plt.title(locus)
             plt.xticks(ind+width/2., list(frequencies.keys()))
-            plt.legend((p1[0], p2[0]), alleles, loc='center left', bbox_to_anchor=(1, 0.5))
+            plt.legend((p1[0], p2[0]), alleles, loc='center left',
+                       bbox_to_anchor=(1, 0.5))
             plt.savefig(argv[2] + locus + "_plot.svg", format="svg")
-            
+
         elif len(alleles) == 3:
             freqs = [x for x in frequencies.values()]
             p1 = plt.bar(ind, [x[0] for x in freqs], width, color='r')
-            p2 = plt.bar(ind, [x[1] for x in freqs], width, color='y', bottom=[x[0] for x in freqs])
-            p3 = plt.bar(ind, [x[2] for x in freqs], width, color='g', bottom=list(map(add, [x[1] for x in freqs], [x[0] for x in freqs])))
+            p2 = plt.bar(ind, [x[1] for x in freqs], width, color='y',
+                         bottom=[x[0] for x in freqs])
+            p3 = plt.bar(ind, [x[2] for x in freqs], width, color='g',
+                         bottom=list(map(add, [x[1] for x in freqs],
+                                         [x[0] for x in freqs])))
             plt.ylabel("Allele Frequency")
             plt.title(locus)
             plt.xticks(ind+width/2., list(frequencies.keys()))
-            plt.legend((p1[0], p2[0], p3[0]), alleles, loc='center left', bbox_to_anchor=(1, 0.5))
-            plt.savefig(argv[2] + locus + "_plot.svg", format="svg")
-            
+            plt.legend((p1[0], p2[0], p3[0]), alleles, loc='center left',
+                       bbox_to_anchor=(1, 0.5))
+            plt.savefig(outpath + locus + "_plot.svg", format="svg")
+
             plt.close(figcounter)
             figcounter += 1
-        
-            
+
+
 def translation(alleles):
     """Get the number encoded alleles and return their ACGT value."""
     tr_table = {ord("1"):"A", ord("2"):"C", ord("3"):"G", ord("4"):"T"}
     alleles = [x.translate(tr_table) for x in alleles]
-    
+
     return alleles
 
 
